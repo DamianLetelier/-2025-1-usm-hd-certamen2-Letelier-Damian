@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Comunas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f3f3f3;
+        }
+        a {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Listado de Comunas</h1>
+    <div style="text-align:center; margin-bottom: 20px;">
+        <a href="{% url 'comuna_create' %}">+ Nueva Comuna</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Habitantes</th>
+                <th>Vulnerabilidad (%)</th>
+                <th>Fundación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comuna in comunas %}
+            <tr>
+                <td>{{ comuna.id }}</td>
+                <td>{{ comuna.nombre }}</td>
+                <td>{{ comuna.cantidad_habitantes }}</td>
+                <td>{{ comuna.tasa_de_vulneribilidad }}</td>
+                <td>{{ comuna.fecha_fundacion }}</td>
+                <td>
+                    <a href="{% url 'comuna_update' comuna.id %}">Editar</a>
+                    <a href="{% url 'comuna_delete' comuna.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay comunas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
