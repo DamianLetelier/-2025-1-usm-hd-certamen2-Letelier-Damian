@@ -7,3 +7,6 @@ class comuna(models.Model):
  cantidad_habitantes = models.IntegerField(null=True)
  tasa_de_vulneribilidad = models.DecimalField(max_digits=10, decimal_places=2, default=0)
  fecha_fundacion = models.DateField(default=timezone.now)
+
+def __str__(self):
+ return self.nombre

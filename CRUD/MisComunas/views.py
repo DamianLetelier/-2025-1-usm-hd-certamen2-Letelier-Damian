@@ -17,20 +17,21 @@ def comuna_create(request):
     return render(request, 'MisComunas/form.html', {'form': form})
 
 def comuna_update(request, pk):
-    comuna = comuna.objects.all()
-    comuna = get_object_or_404(comuna, pk=pk)
+    comuna_instancia = get_object_or_404(comuna, pk=pk) 
+
     if request.method == 'POST':
-        form = ComunaForm(request.POST, instance=comuna)
+        form = ComunaForm(request.POST, instance=comuna_instancia)
         if form.is_valid():
             form.save()
             return redirect('comuna_list')
     else:
-        form = ComunaForm(instance=comuna)
+        form = ComunaForm(instance=comuna_instancia)
+
     return render(request, 'MisComunas/form.html', {'form': form})
 
 def comuna_delete(request, pk):
-    comuna = get_object_or_404(comuna, pk=pk)
+    comuna_instancia = get_object_or_404(comuna, pk=pk)
     if request.method == 'POST':
-        comuna.delete()
+        comuna_instancia.delete()
         return redirect('comuna_list')
-    return render(request, 'MisComunas/confirm_delete.html', {'comuna': comuna})
+    return render(request, 'MisComunas/confirm_delete.html', {'comuna': comuna_instancia})
